@@ -1,4 +1,100 @@
 Missions:
   Mining:
-    Required:
-      - ""
+    Name: "&aMining missions"
+    Item:
+      # Configuration of the items that will be displayed in the GUI
+      Available:
+        ID: "STONE_PICKAXE"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&a&lMission available!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by mining."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+      Locked:
+        ID: "BARRIER"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&c&lThis mission is locked!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by mining."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+          - "&cRequired Missions:"
+          - "  &c%required-missions%"
+          - "&f"
+      Select:
+        ID: "STONE_PICKAXE"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission is already selected!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by mining."
+          - "&f"
+          - "&7Status:"
+          - "&a%progress%/100"
+          - "&f"
+      Complete:
+        ID: "DIAMOND_PICKAXE"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission has already been completed!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by mining."
+          - "&f"
+          - "&7Required:"
+          - "  &a&lCOMPLETED"
+          - "&f"
+    Tiers:
+      # Mission tier
+      0:
+        # Mission ID name
+        mining-0:
+          Required:
+            COAL_ORE: 16
+          Rewards:
+            - "/monedas give %player% 10"
+        mining-1:
+          Required-mission:
+            - "mining-0"
+          Required:
+            IRON_ORE: 8
+          Rewards:
+            - "/monedas give %player% 10"
+        mining-2:
+          Required-mission:
+            - "mining-0"
+            - "mining-1"
+          Required:
+            IRON_ORE: 16
+          Rewards:
+            - "/monedas give %player% 10"
+      1:
+        mining-3:
+          Required:
+            COAL: 32
+          Rewards:
+            - "/monedas give %player% 15"
+        mining-4:
+          Required:
+            IRON_INGOT: 16
+          Rewards:
+            - "/monedas give %player% 15"
+        mining-5:
+          Required:
+            IRON_INGOT: 32
+          Rewards:
+            - "/monedas give %player% 15"

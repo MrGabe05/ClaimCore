@@ -4,7 +4,6 @@ public enum MissionType {
 
     MINING,
     KILLING,
-    BAKING,
     CRAFTING,
-    OTHER,
+    FARMING,
 }

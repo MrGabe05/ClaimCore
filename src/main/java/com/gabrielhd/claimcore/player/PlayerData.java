@@ -1,7 +1,6 @@
 package com.gabrielhd.claimcore.player;
 
 import com.gabrielhd.claimcore.claims.Claim;
-import com.gabrielhd.claimcore.missions.MissionPlayer;
 import lombok.Getter;
 import lombok.Setter;
 

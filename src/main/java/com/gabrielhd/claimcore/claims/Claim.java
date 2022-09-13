@@ -1,6 +1,7 @@
 package com.gabrielhd.claimcore.claims;
 
-import com.gabrielhd.claimcore.missions.MissionClaim;
+import com.gabrielhd.claimcore.missions.Mission;
+import com.gabrielhd.claimcore.missions.MissionProgress;
 import com.gabrielhd.claimcore.upgrades.Upgrades;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,9 @@ public class Claim {
 
     @Getter private final Map<Upgrades, Integer> upgrades;
     
-    @Getter @Setter private MissionClaim currentMission;
+    @Getter @Setter private MissionProgress currentMission;
+
+    private final List<String> completedMissions;
 
     public Claim(UUID uuid) {
         this.owner = uuid;
@@ -28,9 +31,14 @@ public class Claim {
         this.chunks = new HashSet<>();
 
         this.upgrades = new HashMap<>();
+        this.completedMissions = new ArrayList<>();
     }
 
     public static Claim of(UUID uuid) {
         return claims.getOrDefault(uuid, null);
+    }
+
+    public boolean hasCompleted(Mission mission) {
+        return this.completedMissions.contains(mission.getName().toLowerCase(Locale.ROOT));
     }
 }

@@ -22,6 +22,17 @@ public class YamlConfig extends YamlConfiguration {
         this.options().parseComments(true);
     }
 
+    public YamlConfig(Main plugin, File file) {
+        this.plugin = plugin;
+
+        this.path = file.getName() + ".yml";
+        this.file = file;
+
+        this.reload();
+
+        this.options().parseComments(true);
+    }
+
     public void reload() {
         try {
             super.load(this.file);
