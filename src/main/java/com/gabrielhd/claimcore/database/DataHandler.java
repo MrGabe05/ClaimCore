@@ -1,14 +1,12 @@
 package com.gabrielhd.claimcore.database;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.player.PlayerData;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.logging.Level;
@@ -17,18 +15,21 @@ public abstract class DataHandler {
 
     public abstract Connection getConnection();
 
-    private static final String TABLE = "claimscore_";
+    private static final String TABLE_CLAIM = "claimscore_claimdata_";
+    private static final String TABLE_PLAYER = "claimscore_playerdata_";
 
-    private final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + " (uuid VARCHAR(100), claims TEXT, PRIMARY KEY ('uuid'));";
+    private final String CREATE_TABLE_PLAYER = "CREATE TABLE IF NOT EXISTS " + TABLE_PLAYER + " (uuid VARCHAR(36), claims VARCHAR(36), PRIMARY KEY ('uuid'));";
+    private final String CREATE_TABLE_CLAIM = "CREATE TABLE IF NOT EXISTS " + TABLE_CLAIM + " (uuid VARCHAR(36), owner VARCHAR(36), members TEXT, chunks TEXT, upgrades TEXT, missions TEXT, currentMission VARCHAR(30), PRIMARY KEY ('uuid'));";
 
-    private final String SELECT_PLAYER = "SELECT * FROM " + TABLE + " WHERE uuid='%s'";
+    private final String SELECT_PLAYER = "SELECT * FROM " + TABLE_PLAYER + " WHERE uuid='%s'";
 
     public synchronized void setupTable() {
         try {
-            this.execute(CREATE_TABLE);
+            this.execute(CREATE_TABLE_PLAYER);
+            this.execute(CREATE_TABLE_CLAIM);
         } catch (SQLException e) {
-            Main.getInstance().getLogger().log(Level.SEVERE, "Error inserting columns! Please check your configuration!");
-            Main.getInstance().getLogger().log(Level.SEVERE, "If this error persists, please report it to the developer!");
+            ClaimCore.getInstance().getLogger().log(Level.SEVERE, "Error inserting columns! Please check your configuration!");
+            ClaimCore.getInstance().getLogger().log(Level.SEVERE, "If this error persists, please report it to the developer!");
 
             e.printStackTrace();
         }
@@ -49,34 +50,6 @@ public abstract class DataHandler {
             }
         } catch (SQLException ignored) {}
         return false;
-    }
-
-    private Map<String, Integer> get(String s) {
-        Map<String, Integer> value = new HashMap<>();
-
-        String[] split = s.split(";");
-
-        for(String s2 : split) {
-            String[] split2 = s2.split(":");
-
-            value.put(split2[0], Integer.valueOf(split2[1]));
-        }
-
-        return value;
-    }
-
-    private String get(Map<String, Integer> value) {
-        StringBuilder builder = new StringBuilder();
-
-        for(Map.Entry<String, Integer> entry : value.entrySet()) {
-            if(builder.length() > 0) {
-                builder.append(";");
-            }
-
-            builder.append(entry.getKey()).append(entry.getValue());
-        }
-
-        return builder.toString();
     }
 
     public CompletionStage<Boolean> loadPlayer(PlayerData playerData) {

@@ -1,24 +1,30 @@
 package com.gabrielhd.claimcore.missions;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+@Getter
 public class Mission {
 
-    @Getter private final String name;
-    @Getter private final String displayName;
+    private final String id;
+    private final MissionType type;
 
-    @Getter private final MissionType type;
+    private final Set<String> requiredMission;
+    private final Map<String, Integer> required;
 
-    @Getter private final Map<String, Integer> required;
+    @Setter private String displayName;
 
-    public Mission(String name, MissionType type) {
-        this.name = name;
+    public Mission(String id, MissionType type) {
+        this.id = id;
         this.type = type;
-        this.displayName = name;
+        this.displayName = id;
 
         this.required = new HashMap<>();
+        this.requiredMission = new HashSet<>();
     }
 }

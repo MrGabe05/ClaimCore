@@ -1,6 +1,6 @@
 package com.gabrielhd.claimcore.menu;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,7 +20,7 @@ public abstract class Menu implements Listener {
     public Menu(String name, int rows) {
         this.inventory = Bukkit.createInventory(null, 9 * rows, Color.text(name));
 
-        Main.getInstance().getServer().getPluginManager().registerEvents(this, Main.getInstance());
+        ClaimCore.getInstance().getServer().getPluginManager().registerEvents(this, ClaimCore.getInstance());
     }
 
     public void addItem(ItemStack stack) {

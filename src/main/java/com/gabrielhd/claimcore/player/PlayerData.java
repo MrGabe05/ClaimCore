@@ -1,6 +1,7 @@
 package com.gabrielhd.claimcore.player;
 
 import com.gabrielhd.claimcore.claims.Claim;
+import com.gabrielhd.claimcore.database.Database;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,13 +16,22 @@ public class PlayerData {
     @Getter private final UUID uuid;
 
     @Getter @Setter private Claim claim;
-    @Getter @Setter private MissionPlayer currentMission;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
+
+        Database.getStorage().loadPlayer(this).thenAccept(loaded -> players.put(this.uuid, this));
     }
 
     public static PlayerData of(UUID uuid) {
         return players.getOrDefault(uuid, null);
+    }
+
+    public static void load(UUID uuid) {
+        new PlayerData(uuid);
+    }
+
+    public static void save(UUID uuid) {
+        Database.getStorage().uploadPlayer(of(uuid));
     }
 }

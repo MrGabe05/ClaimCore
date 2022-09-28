@@ -1,6 +1,6 @@
 package com.gabrielhd.claimcore.database.types;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.database.DataHandler;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.pool.HikariPool;
@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 public class MySQL extends DataHandler {
 
-    private final Main plugin;
+    private final ClaimCore plugin;
 
     private final String url;
     private final String username;
@@ -20,7 +20,7 @@ public class MySQL extends DataHandler {
     private Connection connection;
     private HikariDataSource ds;
     
-    public MySQL(Main plugin, String host, String port, String database, String username, String password) {
+    public MySQL(ClaimCore plugin, String host, String port, String database, String username, String password) {
         this.plugin = plugin;
         this.url = "jdbc:mysql://" + host + ":" + port + "/" + database;
         this.username = username;
@@ -48,7 +48,7 @@ public class MySQL extends DataHandler {
     }
     
     private synchronized void setConnectionArguments() throws RuntimeException {
-        (this.ds = new HikariDataSource()).setPoolName("Main MySQL");
+        (this.ds = new HikariDataSource()).setPoolName("ClaimCore MySQL");
 
         this.ds.setDriverClassName("com.mysql.jdbc.Driver");
         this.ds.setJdbcUrl(this.url);

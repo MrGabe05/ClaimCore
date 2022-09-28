@@ -1,6 +1,6 @@
 package com.gabrielhd.claimcore.lang;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.config.YamlConfig;
 import com.gabrielhd.claimcore.utils.Color;
 import com.gabrielhd.claimcore.utils.TextPlaceholders;
@@ -58,11 +58,11 @@ public class Lang {
     }
 
     public static void loadLangs() {
-        File langFolder = new File(Main.getInstance().getDataFolder(), "/lang/");
+        File langFolder = new File(ClaimCore.getInstance().getDataFolder(), "/lang/");
         if(!langFolder.exists()) langFolder.mkdir();
 
         Arrays.stream(langFolder.listFiles()).filter(File::isFile).filter(file -> file.getPath().endsWith(".yml")).forEach(file -> {
-            YamlConfig langConfig = new YamlConfig(Main.getInstance(), file);
+            YamlConfig langConfig = new YamlConfig(ClaimCore.getInstance(), file);
 
             String lang = file.getName().split("_")[1].replace(".yml", "");
 
@@ -91,7 +91,7 @@ public class Lang {
             }
             langConfig.save();
 
-            Main.getInstance().getLogger().info("Lang " + lang + " loaded.");
+            ClaimCore.getInstance().getLogger().info("Lang " + lang + " loaded.");
         });
     }
 }

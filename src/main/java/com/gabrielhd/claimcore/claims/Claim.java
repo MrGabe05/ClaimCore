@@ -11,9 +11,8 @@ import java.util.*;
 
 public class Claim {
 
-    @Getter private static final Map<UUID, Claim> claims = new HashMap<>();
-
     @Getter private final UUID owner;
+    @Getter private final UUID claim;
 
     @Getter private final Set<UUID> members;
     @Getter private final Set<Chunk> chunks;
@@ -25,7 +24,12 @@ public class Claim {
     private final List<String> completedMissions;
 
     public Claim(UUID uuid) {
+        this(uuid, UUID.randomUUID());
+    }
+
+    public Claim(UUID uuid, UUID claimUuid) {
         this.owner = uuid;
+        this.claim = claimUuid;
 
         this.members = new HashSet<>();
         this.chunks = new HashSet<>();
@@ -34,11 +38,7 @@ public class Claim {
         this.completedMissions = new ArrayList<>();
     }
 
-    public static Claim of(UUID uuid) {
-        return claims.getOrDefault(uuid, null);
-    }
-
     public boolean hasCompleted(Mission mission) {
-        return this.completedMissions.contains(mission.getName().toLowerCase(Locale.ROOT));
+        return this.completedMissions.contains(mission.getId().toLowerCase(Locale.ROOT));
     }
 }

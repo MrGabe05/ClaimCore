@@ -1,6 +1,6 @@
 package com.gabrielhd.claimcore.database.types;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.database.DataHandler;
 
 import java.sql.Connection;
@@ -10,17 +10,14 @@ import java.util.logging.Level;
 
 public class SQLite extends DataHandler {
 
-    private final String table;
     private Connection connection;
     
-    public SQLite(Main plugin) {
-        this.table = "claimcore_";
-
+    public SQLite(ClaimCore plugin) {
         this.connect(plugin);
         this.setupTable();
     }
     
-    private synchronized void connect(Main plugin) {
+    private synchronized void connect(ClaimCore plugin) {
         try {
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + plugin.getDataFolder() + "/Database.db");

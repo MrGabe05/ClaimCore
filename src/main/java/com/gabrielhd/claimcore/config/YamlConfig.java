@@ -1,6 +1,6 @@
 package com.gabrielhd.claimcore.config;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -9,9 +9,9 @@ public class YamlConfig extends YamlConfiguration {
 
     private final File file;
     private final String path;
-    private final Main plugin;
+    private final ClaimCore plugin;
 
-    public YamlConfig(Main plugin, String path) {
+    public YamlConfig(ClaimCore plugin, String path) {
         this.plugin = plugin;
 
         this.path = path + ".yml";
@@ -22,7 +22,7 @@ public class YamlConfig extends YamlConfiguration {
         this.options().parseComments(true);
     }
 
-    public YamlConfig(Main plugin, File file) {
+    public YamlConfig(ClaimCore plugin, File file) {
         this.plugin = plugin;
 
         this.path = file.getName() + ".yml";

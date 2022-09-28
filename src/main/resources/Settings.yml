@@ -16,3 +16,12 @@ Settings:
   #
   # If false, vault will be used instead
   Economy: true
+
+XPSystem:
+  Blocks:
+    DIAMOND_BLOCK: 50
+    EMERALD_BLOCK: 70
+    GOLD_BLOCK: 40
+    IRON_BLOCK: 30
+    COAL_BLOCK: 10
+

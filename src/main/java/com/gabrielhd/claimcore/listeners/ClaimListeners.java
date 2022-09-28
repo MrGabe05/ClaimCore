@@ -10,6 +10,5 @@ public class ClaimListeners implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-
     }
 }

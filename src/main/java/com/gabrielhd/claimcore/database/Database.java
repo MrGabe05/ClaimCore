@@ -1,6 +1,6 @@
 package com.gabrielhd.claimcore.database;
 
-import com.gabrielhd.claimcore.Main;
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.config.YamlConfig;
 import com.gabrielhd.claimcore.database.types.MySQL;
 import com.gabrielhd.claimcore.database.types.SQLite;
@@ -10,7 +10,7 @@ public class Database {
 
     private static DataHandler storage;
     
-    public Database(Main plugin) {
+    public Database(ClaimCore plugin) {
         FileConfiguration data = new YamlConfig(plugin, "Settings");
 
         String host = data.getString("Database.Host");

@@ -11,6 +11,10 @@ public class PartyCmds implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if(sender instanceof Player player) {
 
+
+            if(args[0].equalsIgnoreCase("create")) {
+
+            }
         }
         return false;
     }

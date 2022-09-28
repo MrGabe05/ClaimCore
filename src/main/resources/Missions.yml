@@ -63,11 +63,13 @@ Missions:
       0:
         # Mission ID name
         mining-0:
+          DisplayName: "&aMining mission"
           Required:
             COAL_ORE: 16
           Rewards:
             - "/monedas give %player% 10"
         mining-1:
+          DisplayName: "&aMining mission"
           Required-mission:
             - "mining-0"
           Required:
@@ -75,6 +77,7 @@ Missions:
           Rewards:
             - "/monedas give %player% 10"
         mining-2:
+          DisplayName: "&aMining mission"
           Required-mission:
             - "mining-0"
             - "mining-1"
@@ -84,16 +87,19 @@ Missions:
             - "/monedas give %player% 10"
       1:
         mining-3:
+          DisplayName: "&aMining mission"
           Required:
             COAL: 32
           Rewards:
             - "/monedas give %player% 15"
         mining-4:
+          DisplayName: "&aMining mission"
           Required:
             IRON_INGOT: 16
           Rewards:
             - "/monedas give %player% 15"
         mining-5:
+          DisplayName: "&aMining mission"
           Required:
             IRON_INGOT: 32
           Rewards:
