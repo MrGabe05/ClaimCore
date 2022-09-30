@@ -35,7 +35,7 @@ public class MissionListeners implements Listener {
         String type = block.getType().name().toLowerCase(Locale.ROOT);
 
         if(mission.getMission().getRequired().containsKey(type)) {
-            if(isCompleted(mission)) {
+            if(claim.isCompleted()) {
                 Lang.NOTIFY_MISSION_COMPLETED.send(new TextPlaceholders().set("%mission%", mission.getMission().getDisplayName()), player);
                 return;
             }
@@ -61,7 +61,7 @@ public class MissionListeners implements Listener {
         String type = entity.getType().name().toLowerCase(Locale.ROOT);
 
         if(mission.getMission().getRequired().containsKey(type)) {
-            if(isCompleted(mission)) {
+            if(claim.isCompleted()) {
                 Lang.NOTIFY_MISSION_COMPLETED.send(new TextPlaceholders().set("%mission%", mission.getMission().getDisplayName()), player);
                 return;
             }
@@ -69,15 +69,5 @@ public class MissionListeners implements Listener {
             if(mission.getProgress().getOrDefault(type, 0) >= mission.getMission().getRequired().get(type)) return;
             mission.getProgress().put(type, mission.getProgress().getOrDefault(type, 0) + 1);
         }
-    }
-
-    public boolean isCompleted(MissionProgress mission) {
-        for(String key : mission.getMission().getRequired().keySet()) {
-            if(mission.getProgress().getOrDefault(key, 0) < mission.getMission().getRequired().get(key)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

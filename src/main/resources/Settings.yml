@@ -16,6 +16,8 @@ Settings:
   #
   # If false, vault will be used instead
   Economy: true
+  #
+  PartyLimits: 10
 
 XPSystem:
   Blocks:

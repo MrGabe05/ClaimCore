@@ -1,10 +1,12 @@
 package com.gabrielhd.claimcore.config;
 
 import com.gabrielhd.claimcore.ClaimCore;
+import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
+@Getter
 public class YamlConfig extends YamlConfiguration {
 
     private final File file;

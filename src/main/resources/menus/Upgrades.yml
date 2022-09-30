@@ -1,0 +1,104 @@
+Title: "&aUpgrades"
+Pattern:
+  - '#########'
+  - '#$@%(&*!#'
+  - '#########'
+Items:
+  '$':
+    Action: CLAIMS
+    Type: GRASS_BLOCK
+    Name: "&aClaims"
+    Lore:
+      - "&f"
+      - "&aClaims Upgrade"
+      - "&f"
+      - "&7Increase the limit of your borders with this upgrade!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_claims_level% Limits: %claims_limits%"
+      - "&aNext Level: &f%upgrade_claims_nextlevel% Limits: %next_claims_limits%"
+      - "&aCost: &f%next_claims_price%"
+      - "&f"
+  '@':
+    Action: CROP
+    Type: DIAMOND_HOE
+    Name: "&aCrop Growth"
+    Lore:
+      - "&f"
+      - "&aCrop Growth Upgrade"
+      - "&f"
+      - "&7Increase the growth of crops in your claims!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_cropgrowth_level% Limits: %cropgrowth_limits%"
+      - "&aNext Level: &f%upgrade_cropgrowth_nextlevel% Limits: %next_cropgrowth_limits%"
+      - "&aCost: &f%next_cropgrowth_price%"
+      - "&f"
+  '%':
+    Action: HOPPERS
+    Type: HOPPER
+    Name: "&aMax Hoppers"
+    Lore:
+      - "&f"
+      - "&aMax Hoppers Upgrade"
+      - "&f"
+      - "&7Increase the maximum amount of hoppers allowed in your claims!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_maxhoppers_level% Limits: %maxhoppers_limits%"
+      - "&aNext Level: &f%upgrade_maxhoppers_nextlevel% Limits: %next_maxhoppers_limits%"
+      - "&aCost: &f%next_maxhoppers_price%"
+      - "&f"
+  '(':
+    Action: SPAWNERS
+    Type: SPAWNER
+    Name: "&aMax Spawners"
+    Lore:
+      - "&f"
+      - "&aMax Spawners Upgrade"
+      - "&f"
+      - "&7Increase the allowed amount of spawners stacks in your claims!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_maxspawners_level% Limits: %maxspawners_limits%"
+      - "&aNext Level: &f%upgrade_maxspawners_nextlevel% Limits: %next_maxspawners_limits%"
+      - "&aCost: &f%next_maxspawners_price%"
+      - "&f"
+  '&':
+    Action: SPAWNING
+    Type: ZOMBIE_SPAWN_EGG
+    Name: "&aMob Spawning"
+    Lore:
+      - "&f"
+      - "&aMob Spawning Upgrade"
+      - "&f"
+      - "&7Increase the speed of all spawners in your party claims!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_mobspawning_level% Limits: %mobspawning_limits%"
+      - "&aNext Level: &f%upgrade_mobspawning_nextlevel% Limits: %next_mobspawning_limits%"
+      - "&aCost: &f%next_mobspawning_price%"
+      - "&f"
+  '*':
+    Action: LOOT
+    Type: STICK
+    Name: "&aMob Loot"
+    Lore:
+      - "&f"
+      - "&aMob Loot Upgrade"
+      - "&f"
+      - "&7Increase the amount of loot dropped by mobs in your claims!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_mobloot_level% Limits: %mobloot_limits%"
+      - "&aNext Level: &f%upgrade_mobloot_nextlevel% Limits: %next_mobloot_limits%"
+      - "&aCost: &f%next_mobloot_price%"
+      - "&f"
+  '!':
+    Action: EXP
+    Type: EXPERIENCE_BOTTLE
+    Name: "&aMob XP"
+    Lore:
+      - "&f"
+      - "&aMob XP Upgrade"
+      - "&f"
+      - "&7Increase the amount of xp orbs dropped by mobs in your claims!"
+      - "&f"
+      - "&aCurrent Level: &f%upgrade_mobxp_level% Limits: %mobxp_limits%"
+      - "&aNext Level: &f%upgrade_mobxp_nextlevel% Limits: %next_mobxp_limits%"
+      - "&aCost: &f%next_mobxp_price%"
+      - "&f"

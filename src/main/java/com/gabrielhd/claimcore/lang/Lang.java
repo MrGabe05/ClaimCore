@@ -15,14 +15,23 @@ public class Lang {
     private final Map<String, Object> langs = new HashMap<>();
 
     public static Lang
+            INSUFFICIENT_MONEY,
+            UPGRADE_PURCHASED,
+            UPGRADE_MAX_LEVEL,
+            UPGRADE_MAX_LEVEL_FORMAT,
             MISSION_COMPLETED,
-            NOTIFY_MISSION_COMPLETED;
-
-    public void addLang(String lang, String... text) {
-        for(String s : text) {
-            langs.put(lang.toLowerCase(Locale.ROOT), Color.text(s));
-        }
-    }
+            NOTIFY_MISSION_COMPLETED,
+            PLAYER_NOT_EXISTS,
+            PLAYER_NOT_ONLINE,
+            PARTY_COMMANDS_HELP,
+            PARTY_PLAYER_JOIN,
+            PARTY_PLAYER_QUIT,
+            PARTY_PLAYER_KICK,
+            PARTY_ALREADY_IN,
+            PARTY_NOT_IN,
+            PARTY_NOT_OWNER,
+            PARTY_CREATE,
+            PARTY_DISBAND;
 
     public void send(Player player) {
         send(new TextPlaceholders(), player);
@@ -47,6 +56,10 @@ public class Lang {
         });
     }
 
+    public String get() {
+        return (String) langs.values().stream().findFirst().orElse(this.getClass().getName() + " value not set");
+    }
+
     public String get(Player player) {
         return get(player, new TextPlaceholders());
     }
@@ -55,6 +68,21 @@ public class Lang {
         String lang = player.getLocale().split("_")[0];
 
         return (String) langs.getOrDefault(lang.toLowerCase(Locale.ROOT), langs.values().stream().findFirst().orElse(this.getClass().getName() + " value not set"));
+    }
+
+    private void addLangList(String lang, List<String> text) {
+        List<String> finaltext = new ArrayList<>();
+        for(String s : text) {
+            finaltext.add(Color.text(s));
+        }
+
+        langs.put(lang.toLowerCase(Locale.ROOT), finaltext);
+    }
+
+    private void addLang(String lang, String... text) {
+        for(String s : text) {
+            langs.put(lang.toLowerCase(Locale.ROOT), Color.text(s));
+        }
     }
 
     public static void loadLangs() {
@@ -80,7 +108,7 @@ public class Lang {
                         Lang obj = (Lang) field.get(null);
 
                         if(langConfig.isList(field.getName().toLowerCase(Locale.ROOT))) {
-                            obj.addLang(lang, langConfig.getStringList(field.getName().toLowerCase(Locale.ROOT)).toArray(new String[0]));
+                            obj.addLangList(lang, langConfig.getStringList(field.getName().toLowerCase(Locale.ROOT)));
                         } else {
                             obj.addLang(lang, langConfig.getString(field.getName().toLowerCase(Locale.ROOT)));
                         }

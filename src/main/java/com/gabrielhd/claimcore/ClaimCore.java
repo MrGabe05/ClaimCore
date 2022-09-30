@@ -1,5 +1,6 @@
 package com.gabrielhd.claimcore;
 
+import com.gabrielhd.claimcore.database.Database;
 import com.gabrielhd.claimcore.manager.ClaimManager;
 import com.gabrielhd.claimcore.manager.MissionsManager;
 import lombok.Getter;
@@ -19,5 +20,7 @@ public class ClaimCore extends JavaPlugin {
 
         this.claimManager = new ClaimManager();
         this.missionsManager = new MissionsManager();
+
+        new Database(this);
     }
 }

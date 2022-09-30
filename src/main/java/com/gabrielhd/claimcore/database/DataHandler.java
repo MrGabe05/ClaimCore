@@ -18,9 +18,10 @@ public abstract class DataHandler {
     private static final String TABLE_CLAIM = "claimscore_claimdata_";
     private static final String TABLE_PLAYER = "claimscore_playerdata_";
 
-    private final String CREATE_TABLE_PLAYER = "CREATE TABLE IF NOT EXISTS " + TABLE_PLAYER + " (uuid VARCHAR(36), claims VARCHAR(36), PRIMARY KEY ('uuid'));";
-    private final String CREATE_TABLE_CLAIM = "CREATE TABLE IF NOT EXISTS " + TABLE_CLAIM + " (uuid VARCHAR(36), owner VARCHAR(36), members TEXT, chunks TEXT, upgrades TEXT, missions TEXT, currentMission VARCHAR(30), PRIMARY KEY ('uuid'));";
+    private final String CREATE_TABLE_PLAYER = "CREATE TABLE IF NOT EXISTS " + TABLE_PLAYER + " (uuid VARCHAR(40), claim VARCHAR(40), PRIMARY KEY ('uuid'));";
+    private final String CREATE_TABLE_CLAIM = "CREATE TABLE IF NOT EXISTS " + TABLE_CLAIM + " (uuid VARCHAR(40), owner VARCHAR(40), members TEXT, chunks TEXT, upgrades TEXT, missions TEXT, currentMission VARCHAR(30), PRIMARY KEY ('uuid'));";
 
+    private final String SELECT_CLAIM = "SELECT * FROM " + TABLE_CLAIM + " WHERE uuid='%s'";
     private final String SELECT_PLAYER = "SELECT * FROM " + TABLE_PLAYER + " WHERE uuid='%s'";
 
     public synchronized void setupTable() {

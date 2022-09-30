@@ -1,0 +1,6 @@
+name: ClaimCore
+author: GabrielHD55
+version: 1.0
+api-version: 1.18
+main: com.gabrielhd.claimcore.ClaimCore
+description: Chunk Claim Core

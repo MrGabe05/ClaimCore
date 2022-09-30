@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 public class Mission {
 
+    private final int tier;
     private final String id;
     private final MissionType type;
 
@@ -19,7 +20,8 @@ public class Mission {
 
     @Setter private String displayName;
 
-    public Mission(String id, MissionType type) {
+    public Mission(int tier, String id, MissionType type) {
+        this.tier = tier;
         this.id = id;
         this.type = type;
         this.displayName = id;

@@ -1,10 +1,10 @@
 Missions:
   Mining:
-    Name: "&aMining missions"
     Item:
       # Configuration of the items that will be displayed in the GUI
       Available:
-        ID: "STONE_PICKAXE"
+        Type: "STONE_PICKAXE"
+        Name: ""
         Glow: false
         Lore:
           - "&f"
@@ -17,7 +17,8 @@ Missions:
           - "  &a%required% x%amount%"
           - "&f"
       Locked:
-        ID: "BARRIER"
+        Type: "BARRIER"
+        Name: ""
         Glow: false
         Lore:
           - "&f"
@@ -33,7 +34,8 @@ Missions:
           - "  &c%required-missions%"
           - "&f"
       Select:
-        ID: "STONE_PICKAXE"
+        Type: "STONE_PICKAXE"
+        Name: ""
         Glow: true
         Lore:
           - "&f"
@@ -46,7 +48,7 @@ Missions:
           - "&a%progress%/100"
           - "&f"
       Complete:
-        ID: "DIAMOND_PICKAXE"
+        Type: "DIAMOND_PICKAXE"
         Glow: true
         Lore:
           - "&f"

@@ -18,6 +18,16 @@ public class ClaimManager {
         return claims.getOrDefault(uuid, null);
     }
 
+    public Claim getClaimOfPlayer(UUID uuid) {
+        for(Claim claim : claims.values()) {
+            if(claim.getMembers().contains(uuid)) {
+                return claim;
+            }
+        }
+
+        return null;
+    }
+
     public Claim getClaimChunk(Chunk chunk) {
         for(Claim claim : claims.values()) {
             Set<Chunk> chunks = claim.getChunks().stream().filter(claimChunk -> claimChunk.getX() == chunk.getX() && claimChunk.getZ() == chunk.getZ()).collect(Collectors.toSet());
@@ -25,5 +35,13 @@ public class ClaimManager {
             if(!chunks.isEmpty()) return claim;
         }
         return null;
+    }
+
+    public void create(UUID uuid) {
+        claims.put(uuid, new Claim(uuid));
+    }
+
+    public void delete(Claim claim) {
+        claims.remove(claim.getOwner());
     }
 }

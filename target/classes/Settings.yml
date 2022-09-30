@@ -1,0 +1,27 @@
+# Available types: MySQL, SQLite
+StorageType: sqlite
+Database:
+  Host: localhost
+  # Default port Mysql: 3306
+  Port: 3306
+  Database: claimcoredatabase
+  Username: claimcoreuser
+  Password: claimcorepass
+
+Settings:
+  Upgrades: true
+  Missions: true
+  XPSystem: true
+  # The plugin's own economy system will work to buy upgrades of the claim, you can get these coins by completing missions
+  #
+  # If false, vault will be used instead
+  Economy: true
+
+XPSystem:
+  Blocks:
+    DIAMOND_BLOCK: 50
+    EMERALD_BLOCK: 70
+    GOLD_BLOCK: 40
+    IRON_BLOCK: 30
+    COAL_BLOCK: 10
+

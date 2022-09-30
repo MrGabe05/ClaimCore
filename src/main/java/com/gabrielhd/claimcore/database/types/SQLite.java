@@ -14,7 +14,6 @@ public class SQLite extends DataHandler {
     
     public SQLite(ClaimCore plugin) {
         this.connect(plugin);
-        this.setupTable();
     }
     
     private synchronized void connect(ClaimCore plugin) {
@@ -27,10 +26,12 @@ public class SQLite extends DataHandler {
 
             ex.printStackTrace();
         }
+
+        this.setupTable();
     }
 
     @Override
     public Connection getConnection() {
-        return null;
+        return this.connection;
     }
 }

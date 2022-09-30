@@ -1,0 +1,62 @@
+MainMenu:
+  Title: "&aMissions"
+  Pattern:
+    - '#########'
+    - '#$#%#&#!#'
+    - '#########'
+  Mining:
+    ID: '$'
+    Material: DIAMOND_PICKAXE
+    Name: "&aMining missions"
+    Lore:
+      - ""
+  Killing:
+    ID: '%'
+    Material: DIAMOND_SWORD
+    Name: "&aKilling missions"
+    Lore:
+      - ""
+  Crafting:
+    ID: '&'
+    Material: CRAFTING_TABLE
+    Name: "&aCrafting missions"
+    Lore:
+      - ""
+  Farming:
+    ID: '!'
+    Material: DIAMOND_HOE
+    Name: "&aFarming missions"
+    Lore:
+      - ""
+Mining:
+  Title: "&aMining missions"
+  Pattern:
+    - '#########'
+    - '##$$$$$##'
+    - '<########'
+  Missions: '$'
+  Back: '<'
+Killing:
+  Title: "&aKilling missions"
+  Pattern:
+    - '#########'
+    - '##$$$$$##'
+    - '<########'
+  Missions: '$'
+  Back: '<'
+Crafting:
+  Title: "&aCrafting missions"
+  Pattern:
+    - '#########'
+    - '##$$$$$##'
+    - '<########'
+  Missions: '$'
+  Back: '<'
+Farming:
+  Title: "&aFarming missions"
+  Pattern:
+    - '#########'
+    - '##$$$$$##'
+    - '<########'
+  Missions: '$'
+  Back: '<'
