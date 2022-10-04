@@ -16,8 +16,26 @@ Settings:
   #
   # If false, vault will be used instead
   Economy: true
+  # Maximum number of players per party/claim
+  PartyLimits: 10
+  # Using the /claim command instead will generate a chunk close to yours and claim it,
+  # if you don't have a claim it will generate a new one.
+  #
+  # If it is false, the normal claim system will be used, that is,
+  # it will have to be placed in a non-claimed chunk, in order to be able to claim it.
+  ClaimGen: false
 
 XPSystem:
+  # You will gain experience for your claim by killing entities
+  Entity:
+    ZOMBIE: 1
+    SKELETON: 1
+    CREEPER: 1
+  # You will gain experience for your claim for each upgrade purchased
+  Upgrade: 10
+  # You will gain experience for your claim for each completed mission
+  Missions: 20
+  # You will gain experience for your claim for each block of value that is within your borders
   Blocks:
     DIAMOND_BLOCK: 50
     EMERALD_BLOCK: 70

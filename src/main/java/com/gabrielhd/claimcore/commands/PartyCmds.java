@@ -49,7 +49,7 @@ public class PartyCmds implements CommandExecutor {
                         return true;
                     }
 
-                    if(!claim.getOwner().equals(player.getUniqueId())) {
+                    if(!claim.isOwner(player.getUniqueId())) {
                         Lang.PARTY_NOT_OWNER.send(player);
                         return true;
                     }
@@ -71,13 +71,13 @@ public class PartyCmds implements CommandExecutor {
                     }
 
                     if(Config.UPGRADES_ONLY_OWNER) {
-                        if(!claim.getOwner().equals(player.getUniqueId())) {
+                        if(!claim.isOwner(player.getUniqueId())) {
                             Lang.PARTY_NOT_OWNER.send(player);
                             return true;
                         }
                     }
 
-                    new UpgradesMenu(claim).openInventory(player);
+                    new UpgradesMenu(claim, null).openInventory(player);
                     return true;
                 }
 

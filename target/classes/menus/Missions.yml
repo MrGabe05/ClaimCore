@@ -1,62 +1,38 @@
-MainMenu:
-  Title: "&aMissions"
-  Pattern:
-    - '#########'
-    - '#$#%#&#!#'
-    - '#########'
-  Mining:
-    ID: '$'
-    Material: DIAMOND_PICKAXE
+Title: "&aMissions"
+Pattern:
+  - '#########'
+  - '#$#%#&#!#'
+  - '<########'
+
+Items:
+  '$':
+    Action: MINING
+    Type: DIAMOND_PICKAXE
     Name: "&aMining missions"
     Lore:
       - ""
-  Killing:
-    ID: '%'
-    Material: DIAMOND_SWORD
+  '%':
+    Action: KILLING
+    Type: DIAMOND_SWORD
     Name: "&aKilling missions"
     Lore:
       - ""
-  Crafting:
-    ID: '&'
-    Material: CRAFTING_TABLE
+  '&':
+    Action: CRAFTING
+    Type: CRAFTING_TABLE
     Name: "&aCrafting missions"
     Lore:
       - ""
-  Farming:
-    ID: '!'
-    Material: DIAMOND_HOE
+  '!':
+    Action: FARMING
+    Type: DIAMOND_HOE
     Name: "&aFarming missions"
     Lore:
       - ""
-Mining:
-  Title: "&aMining missions"
-  Pattern:
-    - '#########'
-    - '##$$$$$##'
-    - '<########'
-  Missions: '$'
-  Back: '<'
-Killing:
-  Title: "&aKilling missions"
-  Pattern:
-    - '#########'
-    - '##$$$$$##'
-    - '<########'
-  Missions: '$'
-  Back: '<'
-Crafting:
-  Title: "&aCrafting missions"
-  Pattern:
-    - '#########'
-    - '##$$$$$##'
-    - '<########'
-  Missions: '$'
-  Back: '<'
-Farming:
-  Title: "&aFarming missions"
-  Pattern:
-    - '#########'
-    - '##$$$$$##'
-    - '<########'
-  Missions: '$'
-  Back: '<'
+  '<':
+    Action: BACK
+    Type: RED_WOOL
+    Name: "&cPrevious Page"
+  '#':
+    Type: BLACK_STAINED_GLASS_PANE
+    Name: ""

@@ -1,0 +1,12 @@
+Title: "&aFarming missions"
+Pattern:
+  - '#########'
+  - '##$$$$$##'
+  - '<########'
+Missions: '$'
+
+Items:
+  '<':
+    Action: BACK
+    Type: RED_WOOL
+    Name: "&cPrevious Page"

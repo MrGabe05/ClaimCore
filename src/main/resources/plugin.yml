@@ -9,5 +9,5 @@ softdepend:
 commands:
   party:
     usage: /<command>
-    aliases:
-      - claim
+  claim:
+    usage: /<command>

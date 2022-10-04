@@ -15,11 +15,21 @@ public class Lang {
     private final Map<String, Object> langs = new HashMap<>();
 
     public static Lang
+            CHUNK_CLAIMED,
+            CHUNK_ALREADY_CLAIMED,
+            CHUNK_ALREADY_CLAIM,
+            CHUNK_MAX_LIMIT,
             INSUFFICIENT_MONEY,
             UPGRADE_PURCHASED,
             UPGRADE_MAX_LEVEL,
             UPGRADE_MAX_LEVEL_FORMAT,
+            MISSION_LOCKED,
+            MISSION_SELECT,
             MISSION_COMPLETED,
+            MISSION_IN_PROGRESS,
+            MISSION_ALREADY_SELECT,
+            MISSION_ALREADY_COMPLETED,
+            MISSION_TIER_LEVEL_UP,
             NOTIFY_MISSION_COMPLETED,
             PLAYER_NOT_EXISTS,
             PLAYER_NOT_ONLINE,

@@ -1,0 +1,18 @@
+Title: "&aMembers"
+Pattern:
+  - "#########"
+  - "#@@@@@@@#"
+  - "#@@@@@@@#"
+  - "<########"
+
+MembersItem:
+  Type: PLAYER_HEAD
+  Name: "&a%player%"
+
+Items:
+  '<':
+    Action: BACK
+    Type: RED_WOOL
+    Name: "&cPrevious Page"
+
+Members: '@'

@@ -1,0 +1,21 @@
+Title: "&7Do you confirm to perform this action?"
+Pattern:
+  - "#########"
+  - "##@###$##"
+  - "#########"
+Items:
+  '@':
+    Action: YES
+    Type: GREEN_WOOL
+    Name: "&a&lYES"
+    Lore:
+      - ""
+  '$':
+    Action: NO
+    Type: RED_WOOL
+    Name: "&c&lNO"
+    Lore:
+      - ""
+  '#':
+    Type: BLACK_STAINED_GLASS_PANE
+    Name: ""

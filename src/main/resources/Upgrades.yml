@@ -1,37 +1,36 @@
-Upgrades:
-  # Maximum chunks you can claim
-  Claims:
-    # Default Level = 0
-    1:
-      # Chunk limit per claim
-      Amount: 8
-    2:
-      # Upgrade price
-      Price: 200
-      Amount: 10
-    3:
-      Price: 300
-      Amount: 12
-    4:
-      Price: 400
-      Amount: 14
-    5:
-      Price: 500
-      Amount: 16
-  # Maximum number of hoppers you can have
-  MaxHoppers:
-    1:
-      Amount: 25
-    2:
-      Price: 200
-      Amount: 30
-    3:
-      Price: 300
-      Amount: 35
-  # Maximum number of spawners you can have
-  MaxSpawners:
-    1:
-      Amount: 8
-    2:
-      Price: 200
-      Amount: 10
+# Maximum chunks you can claim
+Claims:
+  # Default Level = 0
+  1:
+    # Chunk limit per claim
+    Amount: 8
+  2:
+    # Upgrade price
+    Price: 200
+    Amount: 10
+  3:
+    Price: 300
+    Amount: 12
+  4:
+    Price: 400
+    Amount: 14
+  5:
+    Price: 500
+    Amount: 16
+# Maximum number of hoppers you can have
+MaxHoppers:
+  1:
+    Amount: 25
+  2:
+    Price: 200
+    Amount: 30
+  3:
+    Price: 300
+    Amount: 35
+# Maximum number of spawners you can have
+MaxSpawners:
+  1:
+    Amount: 8
+  2:
+    Price: 200
+    Amount: 10

@@ -3,10 +3,7 @@ package com.gabrielhd.claimcore.missions;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 public class Mission {
@@ -15,6 +12,9 @@ public class Mission {
     private final String id;
     private final MissionType type;
 
+    private double exp;
+
+    private final List<String> rewards;
     private final Set<String> requiredMission;
     private final Map<String, Integer> required;
 
@@ -26,6 +26,7 @@ public class Mission {
         this.type = type;
         this.displayName = id;
 
+        this.rewards = new ArrayList<>();
         this.required = new HashMap<>();
         this.requiredMission = new HashSet<>();
     }

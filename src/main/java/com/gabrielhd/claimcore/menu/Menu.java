@@ -18,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -41,7 +42,13 @@ public abstract class Menu implements Listener {
 
     public Menu(YamlConfig cfg) {
         this.cfg = cfg;
-        this.inventory = Bukkit.createInventory(null, 9 * cfg.getStringList("Pattern").size(), Color.text(cfg.getString("Title")));
+
+        InventoryType type = InventoryType.valueOf(cfg.getString("InventoryType", "CHEST"));
+        if(type == InventoryType.CHEST || type == InventoryType.PLAYER) {
+            this.inventory = Bukkit.createInventory(null, 9 * cfg.getStringList("Pattern").size(), Color.text(cfg.getString("Title")));
+        } else {
+            this.inventory = Bukkit.createInventory(null, type, Color.text(cfg.getString("Title")));
+        }
 
         ClaimCore.getInstance().getServer().getPluginManager().registerEvents(this, ClaimCore.getInstance());
     }

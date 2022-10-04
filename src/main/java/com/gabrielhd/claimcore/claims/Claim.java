@@ -9,8 +9,10 @@ import com.gabrielhd.claimcore.upgrades.Upgrades;
 import com.gabrielhd.claimcore.utils.TextPlaceholders;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang.math.IntRange;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -91,6 +93,34 @@ public class Claim {
         }
 
         return true;
+    }
+
+    public boolean isOwner(UUID uuid) {
+        return this.owner.equals(uuid);
+    }
+
+    public void checkCompletedMissions() {
+        if(!hasCompleted(ClaimCore.getInstance().getMissionsManager().getMissions(this.missionsTier).stream().map(Mission::getId).collect(Collectors.toSet()))) {
+            return;
+        }
+
+        this.missionsTier++;
+    }
+
+    public void checkExp() {
+
+    }
+
+    public boolean isInRegion(Location loc) {
+        for(Chunk chunk : this.chunks) {
+            int posX = chunk.getX() << 4;
+            int posZ = chunk.getZ() << 4;
+
+            if(new IntRange(posX, posX + 16).containsDouble(loc.getX()) && new IntRange(0, 255).containsDouble(loc.getY()) && new IntRange(posZ, posZ + 16).containsDouble(loc.getZ())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean addChunk(Chunk chunk) {
