@@ -16,7 +16,8 @@ public class MiningMenu extends MissionMenu {
 
         this.setPreviousMenu(previous);
         this.setClaim(claim);
-        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getMissionsTier(), MissionType.MINING));
+        this.setType(MissionType.MINING);
+        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getTier(), MissionType.MINING));
 
         this.load();
     }

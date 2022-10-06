@@ -16,7 +16,8 @@ public class CraftingMenu extends MissionMenu {
 
         this.setPreviousMenu(previous);
         this.setClaim(claim);
-        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getMissionsTier(), MissionType.CRAFTING));
+        this.setType(MissionType.CRAFTING);
+        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getTier(), MissionType.CRAFTING));
 
         this.load();
     }

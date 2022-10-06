@@ -16,7 +16,8 @@ public class FarmingMenu extends MissionMenu {
 
         this.setPreviousMenu(previous);
         this.setClaim(claim);
-        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getMissionsTier(), MissionType.FARMING));
+        this.setType(MissionType.FARMING);
+        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getTier(), MissionType.FARMING));
 
         this.load();
     }

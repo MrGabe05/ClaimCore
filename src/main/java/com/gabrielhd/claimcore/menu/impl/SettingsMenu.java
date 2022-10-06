@@ -7,6 +7,8 @@ import com.gabrielhd.claimcore.menu.Menu;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.util.Locale;
+
 public class SettingsMenu extends Menu {
 
     private final Claim claim;
@@ -19,6 +21,17 @@ public class SettingsMenu extends Menu {
 
     @Override
     public void onClick(Player player, InventoryClickEvent event) {
-
+        if(this.getActions().containsKey(event.getSlot())) {
+            switch (this.getActions().get(event.getSlot()).toLowerCase(Locale.ROOT)) {
+                case "missions" -> new MissionsMenu(this.claim, this).openInventory(player);
+                case "upgrades" -> new UpgradesMenu(this.claim, this).openInventory(player);
+                case "members" -> new MembersMenu(this.claim, this).openInventory(player);
+                case "back" -> {
+                    if(this.getPreviousMenu() != null) {
+                        this.getPreviousMenu().openInventory(player);
+                    }
+                }
+            }
+        }
     }
 }

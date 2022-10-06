@@ -16,7 +16,8 @@ public class KillingMenu extends MissionMenu {
 
         this.setPreviousMenu(previous);
         this.setClaim(claim);
-        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getMissionsTier(), MissionType.KILLING));
+        this.setType(MissionType.KILLING);
+        this.setMissions(ClaimCore.getInstance().getMissionsManager().getMissions(claim.getTier(), MissionType.KILLING));
 
         this.load();
     }

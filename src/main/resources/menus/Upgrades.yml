@@ -102,3 +102,7 @@ Items:
       - "&aNext Level: &f%upgrade_mobxp_nextlevel% Limits: %next_mobxp_limits%"
       - "&aCost: &f%next_mobxp_price%"
       - "&f"
+  '<':
+    Action: BACK
+    Type: RED_WOOL
+    Name: "&cPrevious Page"

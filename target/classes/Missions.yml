@@ -4,7 +4,7 @@ Missions:
       # Configuration of the items that will be displayed in the GUI
       Available:
         Type: "STONE_PICKAXE"
-        Name: ""
+        Name: "&aMining mission"
         Glow: false
         Lore:
           - "&f"
@@ -18,7 +18,7 @@ Missions:
           - "&f"
       Locked:
         Type: "BARRIER"
-        Name: ""
+        Name: "&aMining mission"
         Glow: false
         Lore:
           - "&f"
@@ -34,8 +34,8 @@ Missions:
           - "  &c%required-missions%"
           - "&f"
       Select:
-        Type: "STONE_PICKAXE"
-        Name: ""
+        Type: "GOLD_PICKAXE"
+        Name: "&aMining mission"
         Glow: true
         Lore:
           - "&f"
@@ -49,6 +49,7 @@ Missions:
           - "&f"
       Complete:
         Type: "DIAMOND_PICKAXE"
+        Name: "&aMining mission"
         Glow: true
         Lore:
           - "&f"
@@ -65,13 +66,11 @@ Missions:
       0:
         # Mission ID name
         mining-0:
-          DisplayName: "&aMining mission"
           Required:
             COAL_ORE: 16
           Rewards:
             - "/monedas give %player% 10"
         mining-1:
-          DisplayName: "&aMining mission"
           Required-mission:
             - "mining-0"
           Required:
@@ -79,7 +78,6 @@ Missions:
           Rewards:
             - "/monedas give %player% 10"
         mining-2:
-          DisplayName: "&aMining mission"
           Required-mission:
             - "mining-0"
             - "mining-1"
@@ -89,20 +87,329 @@ Missions:
             - "/monedas give %player% 10"
       1:
         mining-3:
-          DisplayName: "&aMining mission"
           Required:
             COAL: 32
           Rewards:
             - "/monedas give %player% 15"
         mining-4:
-          DisplayName: "&aMining mission"
           Required:
             IRON_INGOT: 16
           Rewards:
             - "/monedas give %player% 15"
         mining-5:
-          DisplayName: "&aMining mission"
           Required:
             IRON_INGOT: 32
+          Rewards:
+            - "/monedas give %player% 15"
+  Killing:
+    Item:
+      # Configuration of the items that will be displayed in the GUI
+      Available:
+        Type: "STONE_SWORD"
+        Name: "&cKilling mission"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&a&lMission available!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by killing."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+      Locked:
+        Type: "BARRIER"
+        Name: "&cKilling mission"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&c&lThis mission is locked!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by killing."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+          - "&cRequired Missions:"
+          - "  &c%required-missions%"
+          - "&f"
+      Select:
+        Type: "GOLD_SWORD"
+        Name: "&cKilling mission"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission is already selected!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by killing."
+          - "&f"
+          - "&7Status:"
+          - "&a%progress%/100"
+          - "&f"
+      Complete:
+        Type: "DIAMOND_SWORD"
+        Name: "&cKilling mission"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission has already been completed!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by killing."
+          - "&f"
+          - "&7Required:"
+          - "  &a&lCOMPLETED"
+          - "&f"
+    Tiers:
+      # Mission tier
+      0:
+        # Mission ID name
+        killing-0:
+          Required:
+            ZOMBIE: 10
+          Rewards:
+            - "/monedas give %player% 10"
+        killing-1:
+          Required-mission:
+            - "killing-0"
+          Required:
+            SKELETON: 10
+          Rewards:
+            - "/monedas give %player% 10"
+        killing-2:
+          Required-mission:
+            - "killing-0"
+            - "killing-1"
+          Required:
+            CREEPER: 5
+          Rewards:
+            - "/monedas give %player% 10"
+      1:
+        killing-3:
+          Required:
+            ZOMBIE: 16
+          Rewards:
+            - "/monedas give %player% 15"
+        killing-4:
+          Required:
+            SKELETON: 16
+          Rewards:
+            - "/monedas give %player% 15"
+        killing-5:
+          Required:
+            CREEPER: 10
+          Rewards:
+            - "/monedas give %player% 15"
+  Farming:
+    Item:
+      # Configuration of the items that will be displayed in the GUI
+      Available:
+        Type: "STONE_HOE"
+        Name: "&eFarming mission"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&a&lMission available!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by farming."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+      Locked:
+        Type: "BARRIER"
+        Name: "&eFarming mission"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&c&lThis mission is locked!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by farming."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+          - "&cRequired Missions:"
+          - "  &c%required-missions%"
+          - "&f"
+      Select:
+        Type: "GOLD_HOE"
+        Name: "&eFarming mission"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission is already selected!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by farming."
+          - "&f"
+          - "&7Status:"
+          - "&a%progress%/100"
+          - "&f"
+      Complete:
+        Type: "DIAMOND_HOE"
+        Name: "&eFarming mission"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission has already been completed!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by farming."
+          - "&f"
+          - "&7Required:"
+          - "  &a&lCOMPLETED"
+          - "&f"
+    Tiers:
+      # Mission tier
+      0:
+        # Mission ID name
+        farming-0:
+          Required:
+            WHEAT: 16
+            WHEAT_SEEDS: 8
+          Rewards:
+            - "/monedas give %player% 10"
+        farming-1:
+          Required-mission:
+            - "farming-0"
+          Required:
+            CARROT: 8
+          Rewards:
+            - "/monedas give %player% 10"
+        farming-2:
+          Required-mission:
+            - "farming-0"
+            - "farming-1"
+          Required:
+            POTATO: 8
+          Rewards:
+            - "/monedas give %player% 10"
+      1:
+        farming-3:
+          Required:
+            WHEAT: 32
+            WHEAT_SEEDS: 16
+          Rewards:
+            - "/monedas give %player% 15"
+        farming-4:
+          Required:
+            CARROT: 16
+          Rewards:
+            - "/monedas give %player% 15"
+        farming-5:
+          Required:
+            POTATO: 16
+          Rewards:
+            - "/monedas give %player% 15"
+  Crafting:
+    Item:
+      # Configuration of the items that will be displayed in the GUI
+      Available:
+        Type: "STONE_AXE"
+        Name: "&eCrafting mission"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&a&lMission available!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by crafting."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+      Locked:
+        Type: "BARRIER"
+        Name: "&eCrafting mission"
+        Glow: false
+        Lore:
+          - "&f"
+          - "&c&lThis mission is locked!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by crafting."
+          - "&f"
+          - "&7Required:"
+          - "  &a%required% x%amount%"
+          - "&f"
+          - "&cRequired Missions:"
+          - "  &c%required-missions%"
+          - "&f"
+      Select:
+        Type: "GOLD_AXE"
+        Name: "&eCrafting mission"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission is already selected!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by crafting."
+          - "&f"
+          - "&7Status:"
+          - "&a%progress%/100"
+          - "&f"
+      Complete:
+        Type: "DIAMOND_AXE"
+        Name: "&eCrafting mission"
+        Glow: true
+        Lore:
+          - "&f"
+          - "&a&lThis mission has already been completed!"
+          - "&f"
+          - "&7You must get the necessary items"
+          - "&7by crafting."
+          - "&f"
+          - "&7Required:"
+          - "  &a&lCOMPLETED"
+          - "&f"
+    Tiers:
+      # Mission tier
+      0:
+        # Mission ID name
+        crafting-0:
+          Required:
+            STONE_PICKAXE: 1
+          Rewards:
+            - "/monedas give %player% 10"
+        crafting-1:
+          Required-mission:
+            - "crafting-0"
+          Required:
+            IRON_PICKAXE: 1
+          Rewards:
+            - "/monedas give %player% 10"
+        crafting-2:
+          Required-mission:
+            - "crafting-0"
+            - "crafting-1"
+          Required:
+            DIAMOND_PICKAXE: 1
+          Rewards:
+            - "/monedas give %player% 10"
+      1:
+        crafting-3:
+          Required:
+            DIAMOND_BLOCK: 1
+          Rewards:
+            - "/monedas give %player% 15"
+        crafting-4:
+          Required:
+            NETHERITE_PICKAXE: 1
+          Rewards:
+            - "/monedas give %player% 15"
+        crafting-5:
+          Required:
+            DIAMOND_SWORD: 1
+            DIAMOND_HELMET: 1
+            DIAMOND_CHESTPLATE: 1
+            DIAMOND_LEGGINGS: 1
+            DIAMOND_BOOTS: 1
           Rewards:
             - "/monedas give %player% 15"

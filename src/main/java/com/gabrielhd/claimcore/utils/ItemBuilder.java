@@ -1,7 +1,10 @@
 package com.gabrielhd.claimcore.utils;
 
 import com.gabrielhd.claimcore.ClaimCore;
-import com.gabrielhd.claimcore.utils.placeholders.ClaimPlaceholders;
+import com.gabrielhd.claimcore.claims.Claim;
+import com.gabrielhd.claimcore.config.Config;
+import com.gabrielhd.claimcore.lang.Lang;
+import com.gabrielhd.claimcore.upgrades.Upgrades;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,7 +27,7 @@ public final class ItemBuilder implements Cloneable {
 
     private ItemStack itemStack;
     private ItemMeta itemMeta;
-    private String textureValue = "";
+    private boolean textured = false;
 
     public ItemBuilder(ItemStack itemStack){
         this(itemStack.getType());
@@ -42,6 +45,8 @@ public final class ItemBuilder implements Cloneable {
 
         if(itemMeta instanceof SkullMeta skullMeta) {
             skullMeta.setOwningPlayer(player);
+
+            textured = true;
         }
         return this;
     }
@@ -175,13 +180,46 @@ public final class ItemBuilder implements Cloneable {
         return itemMeta;
     }
 
-    public ItemStack build(OfflinePlayer offlinePlayer){
+    public ItemStack build(OfflinePlayer offlinePlayer) {
+        TextPlaceholders placeholders = new TextPlaceholders();
+        placeholders.set("%player%", offlinePlayer.getName());
+
+        Claim claim = ClaimCore.getInstance().getClaimManager().getClaimOfPlayer(offlinePlayer.getUniqueId());
+        if(claim != null) {
+            placeholders.set("%player_owner%", claim.getOwnerName());
+
+            placeholders.set("%uuid%", claim.getClaim());
+            placeholders.set("%owner_uuid%", claim.getOwner());
+            placeholders.set("%members%", claim.getMembers().size());
+            placeholders.set("%money%", claim.getMoney());
+            placeholders.set("%exp%", claim.getExp());
+            placeholders.set("%level%", claim.getLevel());
+            placeholders.set("%tier%", claim.getTier());
+
+            for(Upgrades upgrades : Upgrades.values()) {
+                String upgradeName = (upgrades.name().replace("_", "").toLowerCase());
+                int upgradeLevel = claim.getUpgradeLevel(upgrades);
+
+                placeholders.set("%upgrade_" + upgradeName + "_level%", upgradeLevel);
+                placeholders.set("%upgrade_" + upgradeName + "_nextlevel%", (upgradeLevel + 1));
+
+                placeholders.set("%" + upgradeName + "_limits%", (Config.UPGRADES_LIMITS.get(upgrades).getOrDefault(upgradeLevel, 1)));
+
+                placeholders.set("%next_" + upgradeName + "_price%", (Config.UPGRADES_COSTS.get(upgrades).containsKey(upgradeLevel + 1) ? Config.UPGRADES_COSTS.get(upgrades).get(upgradeLevel + 1) : Lang.UPGRADE_MAX_LEVEL_FORMAT.get()));
+                placeholders.set("%next_" + upgradeName + "_limits%", Config.UPGRADES_LIMITS.get(upgrades).getOrDefault(upgradeLevel + 1, 1));
+            }
+        }
+
+        if(itemStack.getType() == Material.PLAYER_HEAD && !textured) {
+            asSkullOf(offlinePlayer);
+        }
+
         if(itemMeta.hasDisplayName()) {
-            withName(PlaceholderAPI.setPlaceholders(offlinePlayer, itemMeta.getDisplayName().replace("%player%", offlinePlayer.getName())));
+            withName(PlaceholderAPI.setPlaceholders(offlinePlayer, placeholders.parse(itemMeta.getDisplayName())));
         }
 
         if(itemMeta.hasLore()) {
-            withLore(itemMeta.getLore().stream().map(line -> PlaceholderAPI.setPlaceholders(offlinePlayer, line)).map(line -> new ClaimPlaceholders(ClaimCore.getInstance().getClaimManager().getClaimOfPlayer(offlinePlayer.getUniqueId())).set("%player%", offlinePlayer.getName()).parse(line)).collect(Collectors.toList()));
+            withLore(itemMeta.getLore().stream().map(line -> PlaceholderAPI.setPlaceholders(offlinePlayer, line)).map(placeholders::parse).collect(Collectors.toList()));
         }
 
         return build();
@@ -198,7 +236,7 @@ public final class ItemBuilder implements Cloneable {
             ItemBuilder itemBuilder = (ItemBuilder) super.clone();
             itemBuilder.itemStack = itemStack.clone();
             itemBuilder.itemMeta = itemMeta.clone();
-            itemBuilder.textureValue = textureValue;
+            itemBuilder.textured = textured;
             return itemBuilder;
         }catch(Exception ex){
             throw new NullPointerException(ex.getMessage());

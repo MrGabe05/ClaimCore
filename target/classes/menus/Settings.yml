@@ -1,31 +1,29 @@
-Title: ""
+Title: "&aSettings"
 Pattern:
   - "#########"
-  - "#!##@$%*#"
+  - "#!#@#$#%#"
   - "#########"
 Items:
   '!':
     Type: PLAYER_HEAD
-    Name: "&c%player-owner%"
+    Name: "&c%player_owner%"
     Lore:
       - "&7"
   '@':
+    Action: MISSIONS
     Type: PAPER
     Name: "&aMissions"
     Lore:
       - ""
   '$':
+    Action: UPGRADES
     Type: EMERALD_BLOCK
     Name: "&aUpgrades"
     Lore:
       - ""
   '%':
-    Type: ""
+    Action: MEMBERS
+    Type: PLAYER_HEAD
     Name: "&aMembers"
-    Lore:
-      - ""
-  '*':
-    Type: DIAMOND_HOE
-    Name: "&aClaim chunk"
     Lore:
       - ""

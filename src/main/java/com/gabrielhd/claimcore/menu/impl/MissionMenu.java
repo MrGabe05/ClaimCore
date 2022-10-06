@@ -13,8 +13,12 @@ import com.gabrielhd.claimcore.utils.ItemBuilder;
 import com.gabrielhd.claimcore.utils.TextPlaceholders;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +36,7 @@ public class MissionMenu extends Menu {
     public MissionMenu(YamlConfig cfg) {
         super(cfg);
 
-        this.missionsSlots = getSlots(this.getCfg(), "Missions", this.getCharSlots());
+        this.missionsSlots = getSlots(cfg, "Missions", this.getCharSlots());
     }
 
     @Override
@@ -54,8 +58,10 @@ public class MissionMenu extends Menu {
                 TextPlaceholders placeholders = new TextPlaceholders().set("%mission-id%", mission.getId()).set("%mission-name%", mission.getDisplayName());
 
                 if(!this.claim.hasCompleted(mission)) {
-                    if(!this.claim.hasCompleted(mission.getRequiredMission())) {
+                    if(this.claim.hasNotCompleted(mission.getRequiredMission())) {
                         Lang.MISSION_LOCKED.send(placeholders, player);
+
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1f, 1f);
                         return;
                     }
 
@@ -68,6 +74,10 @@ public class MissionMenu extends Menu {
                                 this.claim.setCurrentMission(null);
 
                                 this.claim.setExp(this.claim.getExp() + Config.XP_MISSION);
+
+                                mission.getRewards().forEach(reward -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), reward.replace("/", "").replace("%player%", player.getName())));
+
+                                this.load();
                                 return;
                             }
 
@@ -80,6 +90,8 @@ public class MissionMenu extends Menu {
 
                     this.claim.setCurrentMission(new MissionProgress(mission));
                     Lang.MISSION_SELECT.send(placeholders, player);
+
+                    this.load();
                 } else {
                     Lang.MISSION_ALREADY_COMPLETED.send(placeholders, player);
                 }
@@ -93,8 +105,7 @@ public class MissionMenu extends Menu {
             return;
         }
 
-        String sType = this.type.name().toLowerCase(Locale.ROOT);
-        String missionType = sType.substring(0, 1).toUpperCase() + sType.substring(1);
+        String sType = this.type.getColoquial();
 
         YamlConfig missionsConfig = new YamlConfig(ClaimCore.getInstance(), "Missions");
 
@@ -112,6 +123,7 @@ public class MissionMenu extends Menu {
             for(Map.Entry<String, Integer> value : mission.getRequired().entrySet()) {
                 requiredString.append(value.getKey().replace("_", " ")).append(" x").append(value.getValue()).append("\n");
             }
+
             StringBuilder requiredMissions = new StringBuilder();
             for(String requiredMission : mission.getRequiredMission()) {
                 requiredMissions.append(requiredMission).append("\n");
@@ -122,21 +134,22 @@ public class MissionMenu extends Menu {
 
             ItemBuilder builder;
             if(!this.claim.hasCompleted(mission)) {
-                if (!this.claim.hasCompleted(mission.getRequiredMission())) {
+                if (this.claim.hasNotCompleted(mission.getRequiredMission())) {
                     builder = getItemStack("Missions.yml", missionsConfig.getConfigurationSection("Missions." + sType + ".Item.Locked"), textPlaceholders);
                 } else if(this.claim.getCurrentMission() != null && this.claim.getCurrentMission().getMission().getId().equalsIgnoreCase(mission.getId())) {
                     MissionProgress currentMission = this.claim.getCurrentMission();
 
                     int progress = 0;
                     int totalProgress = 0;
+
                     for(Map.Entry<String, Integer> value : mission.getRequired().entrySet()) {
-                        progress += (currentMission.getProgress().get(value.getKey().toLowerCase()) / value.getValue()) * 100;
+                        if(!currentMission.getProgress().containsKey(value.getKey().toLowerCase(Locale.ROOT))) continue;
+
+                        progress += (currentMission.getProgress().get(value.getKey().toLowerCase(Locale.ROOT)) / value.getValue()) * 100;
                         totalProgress += value.getValue();
                     }
 
-                    int finalProgress = (progress / totalProgress) * 100;
-
-                    builder = getItemStack("Missions.yml", missionsConfig.getConfigurationSection("Missions." + sType + ".Item.Select"), textPlaceholders.set("%progress%", finalProgress));
+                    builder = getItemStack("Missions.yml", missionsConfig.getConfigurationSection("Missions." + sType + ".Item.Select"), textPlaceholders.set("%progress%", (progress == 0 && totalProgress == 0 ? "0%" : (progress / totalProgress) * 100) + "%"));
                 } else {
                     builder = getItemStack("Missions.yml", missionsConfig.getConfigurationSection("Missions." + sType + ".Item.Available"), textPlaceholders);
                 }
@@ -147,6 +160,21 @@ public class MissionMenu extends Menu {
             this.setItem(slot, builder.build());
 
             i++;
+        }
+    }
+
+    private void checkPlayerItems(Player player, MissionProgress missionProgress) {
+        for(int i = 0; i < player.getInventory().getSize(); i++) {
+            ItemStack itemStack = player.getInventory().getItem(i);
+            if(itemStack == null || itemStack.getType() == Material.AIR) continue;
+
+            Mission mission = missionProgress.getMission();
+
+            String type = itemStack.getType().name();
+
+            if(mission.getRequired().containsKey(type)) {
+                missionProgress.getProgress().put(type, missionProgress.getProgress().getOrDefault(type, 0) + itemStack.getAmount());
+            }
         }
     }
 }

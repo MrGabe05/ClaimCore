@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 @Getter
@@ -51,6 +52,8 @@ public abstract class Menu implements Listener {
         }
 
         ClaimCore.getInstance().getServer().getPluginManager().registerEvents(this, ClaimCore.getInstance());
+
+        this.loadMenu();
     }
 
     public void addItem(ItemStack stack) {
@@ -70,8 +73,9 @@ public abstract class Menu implements Listener {
         if (event.getInventory().equals(this.inventory) && event.getPlayer() instanceof Player) {
             for(Map.Entry<Integer, ItemBuilder> itemStackEntry : this.fillItems.entrySet()) {
                 ItemBuilder itemBuilder = itemStackEntry.getValue().clone();
-                if(itemStackEntry.getKey() >= 0)
+                if(itemStackEntry.getKey() >= 0) {
                     inventory.setItem(itemStackEntry.getKey(), itemBuilder.build((OfflinePlayer) event.getPlayer()));
+                }
             }
         }
     }
@@ -136,9 +140,10 @@ public abstract class Menu implements Listener {
         Material type;
         try {
             type = Material.valueOf(section.getString("Type"));
-        } catch (IllegalArgumentException ex) {
-            ClaimCore.getInstance().getLogger().info("&c[" + fileName + "] Couldn't convert " + section.getCurrentPath() + " into an itemstack. Check type & data sections!");
-            return null;
+        } catch (Exception ex) {
+            ClaimCore.getInstance().getLogger().log(Level.SEVERE, "[" + fileName + "] Couldn't convert " + section.getCurrentPath() + " into an itemstack. Check type sections!");
+
+            type = Material.BEDROCK;
         }
 
         ItemBuilder itemBuilder = new ItemBuilder(type);

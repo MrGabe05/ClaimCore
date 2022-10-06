@@ -1,9 +1,11 @@
 package com.gabrielhd.claimcore.player;
 
+import com.gabrielhd.claimcore.ClaimCore;
 import com.gabrielhd.claimcore.claims.Claim;
-import com.gabrielhd.claimcore.database.Database;
+import com.gabrielhd.claimcore.visualization.Visualization;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Chunk;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,10 +19,16 @@ public class PlayerData {
 
     @Getter @Setter private Claim claim;
 
+    public boolean inClaim;
+    public Claim lastClaim;
+    public Chunk lastChunk;
+    public Visualization currentVisualization;
+
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
+        this.claim = ClaimCore.getInstance().getClaimManager().getClaimOfPlayer(uuid);
 
-        Database.getStorage().loadPlayer(this).thenAccept(loaded -> players.put(this.uuid, this));
+        players.put(this.uuid, this);
     }
 
     public static PlayerData of(UUID uuid) {
@@ -29,9 +37,5 @@ public class PlayerData {
 
     public static void load(UUID uuid) {
         new PlayerData(uuid);
-    }
-
-    public static void save(UUID uuid) {
-        Database.getStorage().uploadPlayer(of(uuid));
     }
 }

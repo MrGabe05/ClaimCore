@@ -34,3 +34,36 @@ MaxSpawners:
   2:
     Price: 200
     Amount: 10
+MobSpawning:
+  1:
+    # Speed
+    Amount: 10
+  2:
+    Price: 300
+    Amount: 8
+  3:
+    Price: 600
+    Amount: 5
+MobXP:
+  1:
+    # Multiplier
+    Amount: 1
+  2:
+    Price: 500
+    Amount: 2
+  3:
+    Price: 1000
+    Amount: 3
+MobLoot:
+  1:
+    # Multiplier
+    Amount: 1
+  2:
+    Price: 1000
+    Amount: 2
+CropGrowth:
+  1:
+    Amount: 10
+  2:
+    Price: 1000
+    Amount: 20

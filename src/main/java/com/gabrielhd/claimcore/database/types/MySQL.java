@@ -46,8 +46,8 @@ public class MySQL extends DataHandler {
 
         this.setupTable();
     }
-    
-    private synchronized void setConnectionArguments() throws RuntimeException {
+
+    protected synchronized void setConnectionArguments() throws RuntimeException {
         (this.ds = new HikariDataSource()).setPoolName("ClaimCore MySQL");
 
         this.ds.setDriverClassName("com.mysql.jdbc.Driver");
@@ -76,7 +76,7 @@ public class MySQL extends DataHandler {
     }
 
     @Override
-    public Connection getConnection() {
+    protected Connection getConnection() {
         return this.connection;
     }
 }

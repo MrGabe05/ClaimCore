@@ -14,16 +14,14 @@ import java.util.List;
 
 public class MembersMenu extends Menu {
 
-    private final int page;
     private final Claim claim;
 
     private final List<Integer> memberSlots;
 
-    public MembersMenu(Claim claim, int page, Menu previous) {
+    public MembersMenu(Claim claim, Menu previous) {
         super(new YamlConfig(ClaimCore.getInstance(), "menus/Members"));
         this.setPreviousMenu(previous);
 
-        this.page = page;
         this.claim = claim;
 
         this.memberSlots = getSlots(this.getCfg(), "Members", this.getCharSlots());
@@ -41,8 +39,8 @@ public class MembersMenu extends Menu {
     private void load() {
         List<OfflinePlayer> players = this.claim.getPlayers();
 
-        for(int member = (this.page * this.memberSlots.size()); member < ((this.page + 1) * this.memberSlots.size()); member++) {
-            if(players.size() < member) {
+        for(int member = 0; member < this.memberSlots.size(); member++) {
+            if(players.size() <= member) {
                 return;
             }
 

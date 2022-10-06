@@ -4,10 +4,18 @@ version: 1.0
 api-version: 1.18
 main: com.gabrielhd.claimcore.ClaimCore
 description: Chunk Claim Core
-softdepend:
+depend:
   - PlaceholderAPI
+softdepend:
+  - WorldGuard
+  - GriefPrevention
 commands:
   party:
     usage: /<command>
-  claim:
+    aliases:
+      - p
+      - claim
+  coins:
     usage: /<command>
+    aliases:
+      - monedas

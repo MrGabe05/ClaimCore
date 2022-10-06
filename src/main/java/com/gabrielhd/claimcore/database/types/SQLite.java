@@ -15,8 +15,8 @@ public class SQLite extends DataHandler {
     public SQLite(ClaimCore plugin) {
         this.connect(plugin);
     }
-    
-    private synchronized void connect(ClaimCore plugin) {
+
+    protected synchronized void connect(ClaimCore plugin) {
         try {
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + plugin.getDataFolder() + "/Database.db");
@@ -31,7 +31,7 @@ public class SQLite extends DataHandler {
     }
 
     @Override
-    public Connection getConnection() {
+    protected Connection getConnection() {
         return this.connection;
     }
 }

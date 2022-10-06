@@ -8,14 +8,15 @@ import org.bukkit.entity.EntityType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class Config {
 
     public static int PARTY_LIMITS;
 
-    public static double XP_UPGRADE, XP_MISSION;
+    public static double XP_UPGRADE, XP_MISSION, XP_BASE, XP_INCREASE;
 
-    public static boolean UPGRADES_ONLY_OWNER, CLAIM_NEW_CHUNK, UPGRADES, MISSIONS, XPSYSTEM, ECONOMY, CLAIM_GEN;
+    public static boolean DEBUG, UPGRADES, MISSIONS, XPSYSTEM, ECONOMY, CLAIM_GEN;
 
     public static String TYPE, HOST, PORT, DATABASE, USERNAME, PASSWORD;
 
@@ -32,6 +33,7 @@ public class Config {
     private void loadConfig() {
         YamlConfig settings = new YamlConfig(ClaimCore.getInstance(), "Settings");
 
+        DEBUG = settings.getBoolean("Settings.Debug", false);
         PARTY_LIMITS = settings.getInt("Settings.PartyLimits", 10);
         XP_UPGRADE = settings.getDouble("XPSystem.Upgrade", 10.0);
         XP_MISSION = settings.getDouble("XPSystem.Missions", 20.0);
@@ -41,6 +43,9 @@ public class Config {
         MISSIONS = settings.getBoolean("Settings.Missions", true);
         XPSYSTEM = settings.getBoolean("Settings.XPSystem", true);
         CLAIM_GEN = settings.getBoolean("Settings.ClaimGen", false);
+
+        XP_BASE = settings.getDouble("Settings.XP.MultiplierBase", 1000.0);
+        XP_INCREASE = settings.getDouble("Settings.XP.MultiplierIncrease", 200.0);
 
         TYPE = settings.getString("StorageType", "sqlite");
         HOST = settings.getString("Database.Host", "localhost");
@@ -86,17 +91,16 @@ public class Config {
             Map<Integer, Integer> limits = new HashMap<>();
 
             for(String upgradesName : upgradesConfig.getKeys(false)) {
-                if(upgradesName.equalsIgnoreCase(upgrades.name())) {
+                if(upgradesName.equalsIgnoreCase(upgrades.name().replace("_", ""))) {
                     for(String level : upgradesConfig.getConfigurationSection(upgradesName).getKeys(false)) {
                         if(upgradesConfig.isSet(upgradesName + "." + level + ".Amount")) {
                             limits.put(Integer.parseInt(level), upgradesConfig.getInt(upgradesName + "." + level + ".Amount"));
                         }
 
-                        if(upgradesConfig.isSet(upgradesName + "." + level + ".Price")) {
-                            costs.put(Integer.parseInt(level), upgradesConfig.getDouble(upgradesName + "." + level + ".Price"));
-                        }
+                        costs.put(Integer.parseInt(level), upgradesConfig.getDouble(upgradesName + "." + level + ".Price", 0.0));
+
+                        if(Config.DEBUG) ClaimCore.getInstance().getLogger().log(Level.INFO, upgradesName + " Upgrades: " + limits.get(Integer.parseInt(level)) + " Price: " + costs.get(Integer.parseInt(level)));
                     }
-                    break;
                 }
             }
 

@@ -6,8 +6,10 @@ import com.gabrielhd.claimcore.config.Config;
 import com.gabrielhd.claimcore.config.YamlConfig;
 import com.gabrielhd.claimcore.lang.Lang;
 import com.gabrielhd.claimcore.menu.Menu;
+import com.gabrielhd.claimcore.player.PlayerRole;
 import com.gabrielhd.claimcore.upgrades.Upgrades;
 import com.gabrielhd.claimcore.utils.TextPlaceholders;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
@@ -30,6 +32,12 @@ public class UpgradesMenu extends Menu {
                 return;
             }
 
+            PlayerRole playerRole = this.claim.getPlayerRole(player.getUniqueId());
+            if(playerRole.hasPermission(PlayerRole.RolePermissions.UPGRADES_PARTY)) {
+                Lang.PLAYER_NOT_PERMISSIONS.send(player);
+                return;
+            }
+
             for(Upgrades upgrades : Upgrades.values()) {
                 String upgradeName = upgrades.name().replace("_", "");
 
@@ -45,13 +53,21 @@ public class UpgradesMenu extends Menu {
 
                     if(Config.UPGRADES_COSTS.get(upgrades).get(currentLevel + 1) > currentMoney) {
                         Lang.INSUFFICIENT_MONEY.send(player);
+
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_BREAK, 1f, 1f);
                         return;
                     }
 
                     this.claim.setMoney(currentMoney - Config.UPGRADES_COSTS.get(upgrades).get(currentLevel + 1));
                     this.claim.addLevelToUpgrade(upgrades);
 
-                    this.claim.sendMessage(Lang.UPGRADE_PURCHASED, new TextPlaceholders().set("%upgrade%", upgradeName));
+                    this.claim.sendMessage(Lang.UPGRADE_PURCHASED, new TextPlaceholders().set("%upgrade%", upgradeName).set("%level%", (currentLevel + 1)));
+
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
+
+                    if(upgrades == Upgrades.MOB_SPAWNING) {
+                        this.claim.updateSpawners(Config.UPGRADES_LIMITS.get(upgrades).get(this.claim.getUpgradeLevel(upgrades)), 2);
+                    }
                     return;
                 }
             }
